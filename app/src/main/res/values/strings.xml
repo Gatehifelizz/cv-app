@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">CV</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="Write_Your_Names">Enter Your Name</string>
+    <string name="Contact_Details">Contact Details\n</string>
+    <string name="applicants_name">Applicants name</string>
+    <string name="applicants_email">applicants email</string>
+    <string name="linked_profile">linkedin profile</string>
+    <string name="address">address</string>
+    <string name="fill_in_the_form_below_with_your_contact_details">fill in the form below with your contact details, kindly make sure the information you provide is true to the best of your ability</string>
+    <string name="fill_in">kindly fill in your contact details</string>
+    <string name="Skills_section">Skills section</string>
+    <string name="skill">skill\n</string>
+    <string name="work_exeperience">Work experience</string>
+    <string name="about">about\n</string>
+</resources>

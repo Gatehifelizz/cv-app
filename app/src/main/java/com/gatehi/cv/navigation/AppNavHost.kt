@@ -11,13 +11,14 @@ import androidx.navigation.compose.rememberNavController
 import com.gatehi.cv.models.CvViewModel
 import com.gatehi.cv.ui.theme.screens.Forms.CvScreen
 import com.gatehi.cv.ui.theme.screens.Forms.EditCvScreen
+//import com.gatehi.cv.ui.theme.screens.Forms.formscreen
 //import com.gatehi.cv.models.CvViewModel
 //import com.gatehi.cv.ui.theme.screens.Forms.CvScreen
 //import com.gatehi.cv.models.CvViewModel
 //import com.gatehi.cv.ui.theme.screens.Forms.CvScreen
 //import com.gatehi.cv.ui.theme.screens.Forms.SkillSection
-import com.gatehi.cv.ui.theme.screens.Forms.formscreen
-import com.gatehi.cv.ui.theme.screens.Forms.skillscreen
+//import com.gatehi.cv.ui.theme.screens.Forms.formscreen
+//import com.gatehi.cv.ui.theme.screens.Forms.skillscreen
 import com.gatehi.cv.ui.theme.screens.Home.Loginscreen
 import com.gatehi.cv.ui.theme.screens.Home.Signupscreen
 import com.gatehi.cv.ui.theme.screens.Home.Welcomescreen
@@ -47,10 +48,6 @@ fun AppNavHost(modifier: Modifier = Modifier, navController: NavHostController =
         }
         composable(ROUTE_CV){
             CvScreen(navController,cvViewModel)
-        }
-
-        composable(ROUTE_FORM) {
-            formscreen(navController,cvViewModel)
         }
 
 

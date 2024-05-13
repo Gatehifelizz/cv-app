@@ -39,6 +39,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -48,18 +49,28 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.compose.rememberNavController
+import com.gatehi.cv.data.uploadviewmodel
+//import com.gatehi.cv.data.UserRepository
 import com.gatehi.cv.models.CvViewModel
+import com.gatehi.cv.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditCvScreen(navController: NavController, cvViewModel: CvViewModel) {
+fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
 
     var title by remember { mutableStateOf("CV APP") }
+    val userId=FirebaseAuth.getInstance().currentUser?.uid
 
+    var context=LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
 
     var editedFirstName by remember { mutableStateOf(cvViewModel.firstName) }
@@ -429,16 +440,51 @@ fun EditCvScreen(navController: NavController, cvViewModel: CvViewModel) {
                 item{
                     Button(
                         onClick = {
-                            // Update the ViewModel with edited values
+//                             Update the ViewModel with edited values
                             cvViewModel.firstName = editedFirstName
                             cvViewModel.lastName = editedLastName
                             cvViewModel.githubHandle = editedGitHubHandle
                             cvViewModel.slackUsername = editedSlackUsername
                             cvViewModel.bio = editedBio
-//                            cvViewModel.skill=edited
 
-                            // Navigate back to the CVView screen
-                            navController.navigateUp()
+
+                            var cvRepository = uploadviewmodel(navController,context)
+                            cvRepository.saveCv(editedFirstName.trim(),editedLastName.trim(),
+                                editedBio.trim(),editedSlackUsername.trim(),editedGitHubHandle.trim())
+                            navController.navigate("cv")
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp)
+                            .padding(top = 32.dp, bottom = 24.dp),
+                        shape = RoundedCornerShape(12.dp),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.onPrimaryContainer),
+                        elevation = ButtonDefaults.buttonElevation(20.dp)
+                    ) {
+                        Text(
+                            text = "Save Cv",
+                            fontFamily = FontFamily.SansSerif,
+                            fontWeight = FontWeight(300),
+                            fontSize = 14.sp
+                        )
+                    }
+                    Button(
+                        onClick = {
+//                             Update the ViewModel with edited values
+                            cvViewModel.firstName = editedFirstName
+                            cvViewModel.lastName = editedLastName
+                            cvViewModel.githubHandle = editedGitHubHandle
+                            cvViewModel.slackUsername = editedSlackUsername
+                            cvViewModel.bio = editedBio
+
+
+                            var cvRepository = uploadviewmodel(navController,context)
+                            cvRepository.updateCv(editedFirstName.trim(),editedFirstName.trim(),editedLastName.trim(),
+                                editedBio.trim(),editedSlackUsername.trim(),editedGitHubHandle.trim(),)
+
+
+
+                            navController.navigate("cv")
                         },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -455,6 +501,8 @@ fun EditCvScreen(navController: NavController, cvViewModel: CvViewModel) {
                             fontSize = 14.sp
                         )
                     }
+
+
                 }
 
             }

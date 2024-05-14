@@ -343,7 +343,7 @@ fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
                             onValueChange = { editedSlackUsername = it },
                             placeholder = {
                                 Text(
-                                    text = "Enter Github Handle",
+                                    text = "Enter Slack  Handle",
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight(300),
@@ -397,7 +397,7 @@ fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
                             onValueChange = { editedBio = it },
                             placeholder = {
                                 Text(
-                                    text = "Enter Github Handle",
+                                    text = "Enter Bio",
                                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                                     fontFamily = FontFamily.SansSerif,
                                     fontWeight = FontWeight(300),
@@ -479,7 +479,7 @@ fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
 
 
                             var cvRepository = uploadviewmodel(navController,context)
-                            cvRepository.updateCv(editedFirstName.trim(),editedFirstName.trim(),editedLastName.trim(),
+                            cvRepository.updateCv(editedFirstName.trim(),editedLastName.trim(),
                                 editedBio.trim(),editedSlackUsername.trim(),editedGitHubHandle.trim(),)
 
 

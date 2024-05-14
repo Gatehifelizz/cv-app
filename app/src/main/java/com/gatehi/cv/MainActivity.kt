@@ -38,10 +38,7 @@ class MainActivity : ComponentActivity() {
 
         installSplashScreen()
         setContent {
-            val delayTimeMillis = 3000
-            LaunchedEffect(Unit){
-                delay(delayTimeMillis)
-            }
+
             CVTheme {
                 // A surface container using the 'background' color from the theme
                 Box(

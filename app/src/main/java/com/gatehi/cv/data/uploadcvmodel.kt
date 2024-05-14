@@ -41,36 +41,6 @@ class uploadviewmodel(var navController: NavHostController, var context: Context
         editedSlackUsername: String,
         editedBio: String
     ) {
-        var id = System.currentTimeMillis().toString()
-        var cvData = Cv(
-            editedFirstName,
-            editedLastName,
-            editedGitHubHandle,
-            editedSlackUsername,
-            editedBio,
-
-            )
-        var cvRef = FirebaseDatabase.getInstance().getReference()
-            .child("User/$id")
-        progress.show()
-        cvRef.setValue(cvData).addOnCompleteListener {
-            progress.dismiss()
-            if (it.isSuccessful) {
-                Toast.makeText(context, "Saved successful", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(context, "ERROR: ${it.exception!!.message}", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
-    }
-
-    fun updateCv(
-        editedFirstName: String,
-        editedLastName: String,
-        editedGitHubHandle: String,
-        editedSlackUsername: String,
-        editedBio: String
-    ) {
         var currentUser = FirebaseAuth.getInstance().currentUser
         var userId = currentUser?.uid
         if (userId != null) {
@@ -79,15 +49,16 @@ class uploadviewmodel(var navController: NavHostController, var context: Context
                 editedLastName,
                 editedGitHubHandle,
                 editedSlackUsername,
-                editedBio
-            )
+                editedBio,
+
+                )
             var cvRef = FirebaseDatabase.getInstance().getReference()
                 .child("User/$userId")
             progress.show()
             cvRef.setValue(cvData).addOnCompleteListener {
                 progress.dismiss()
                 if (it.isSuccessful) {
-                    Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Saved successful", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(context, "ERROR: ${it.exception!!.message}", Toast.LENGTH_SHORT)
                         .show()
@@ -96,3 +67,4 @@ class uploadviewmodel(var navController: NavHostController, var context: Context
         }
     }
 }
+

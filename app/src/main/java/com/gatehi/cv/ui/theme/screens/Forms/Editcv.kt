@@ -54,6 +54,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.compose.rememberNavController
+import com.gatehi.cv.data.updateviewmodel
 import com.gatehi.cv.data.uploadviewmodel
 //import com.gatehi.cv.data.UserRepository
 import com.gatehi.cv.models.CvViewModel
@@ -68,7 +69,7 @@ import com.google.firebase.database.FirebaseDatabase
 fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
 
     var title by remember { mutableStateOf("CV APP") }
-    val userId=FirebaseAuth.getInstance().currentUser?.uid
+
 
     var context=LocalContext.current
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
@@ -450,7 +451,7 @@ fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
 
                             var cvRepository = uploadviewmodel(navController,context)
                             cvRepository.saveCv(editedFirstName.trim(),editedLastName.trim(),
-                                editedBio.trim(),editedSlackUsername.trim(),editedGitHubHandle.trim())
+                                editedSlackUsername.trim(),editedGitHubHandle.trim(),editedBio.trim(),)
                             navController.navigate("cv")
                         },
                         modifier = Modifier
@@ -476,13 +477,6 @@ fun EditCvScreen(navController: NavHostController, cvViewModel: CvViewModel) {
                             cvViewModel.githubHandle = editedGitHubHandle
                             cvViewModel.slackUsername = editedSlackUsername
                             cvViewModel.bio = editedBio
-
-
-                            var cvRepository = uploadviewmodel(navController,context)
-                            cvRepository.updateCv(editedFirstName.trim(),editedLastName.trim(),
-                                editedBio.trim(),editedSlackUsername.trim(),editedGitHubHandle.trim(),)
-
-
 
                             navController.navigate("cv")
                         },
